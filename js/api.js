@@ -6,10 +6,12 @@
 const API = (() => {
     // ⚡ Thay URL này thành project MockAPI của bạn
     const BASE_URL = 'https://69e9c8b215c7e2d51268b6cb.mockapi.io/api/v1/';
+    const BASE_URLL = 'https://6a06ddebc83ba8ad9b3e0758.mockapi.io/';
 
     const ENDPOINTS = {
         workouts:  `${BASE_URL}/workouts`,
-        exercises: `${BASE_URL}/exercises`
+        exercises: `${BASE_URL}/exercises`,
+        users:     `${BASE_URLL}/users`
     };
 
     // =========================================
@@ -68,5 +70,21 @@ const API = (() => {
         delete:  (id)     => request(`${ENDPOINTS.exercises}/${id}`, 'DELETE')
     };
 
-    return { workouts: Workouts, exercises: Exercises };
+    // Thêm vào trong API module (api.js)
+// Sau ENDPOINTS.exercises
+
+ENDPOINTS.users = `${BASE_URLL}/users`;
+
+// Thêm vào return object:
+const Users = {
+    getAll:  ()      => request(ENDPOINTS.users),
+    getById: (id)    => request(`${ENDPOINTS.users}/${id}`),
+    create:  (body)  => request(ENDPOINTS.users,          'POST', body),
+    update:  (id, b) => request(`${ENDPOINTS.users}/${id}`, 'PUT',  b),
+    delete:  (id)    => request(`${ENDPOINTS.users}/${id}`, 'DELETE')
+};
+
+// return { workouts, exercises, users }
+
+    return { workouts: Workouts, exercises: Exercises, users: Users };
 })();

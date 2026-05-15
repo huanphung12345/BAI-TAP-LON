@@ -910,3 +910,489 @@ body {
         transform: scale(1);
     }
 }
+/* ===================================
+   👤 USERS SECTION
+   =================================== */
+
+/* User Card */
+.user-card {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    overflow: hidden;
+    height: 100%;
+}
+
+.user-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.user-card .user-header {
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.user-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: white;
+    margin: 0 auto 12px;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.user-card .user-name {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.user-card .user-meta {
+    font-size: 0.8rem;
+    opacity: 0.85;
+}
+
+.user-card .user-body {
+    padding: 16px 20px 20px;
+}
+
+.user-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid #F0F2F8;
+    font-size: 0.85rem;
+}
+
+.user-info-row:last-child {
+    border-bottom: none;
+}
+
+.user-info-label {
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.user-info-value {
+    font-weight: 600;
+    color: #333;
+}
+
+/* BMI Badge trong user card */
+.bmi-badge-mini {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+/* Level badges */
+.level-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.level-Mới\ bắt\ đầu {
+    background: rgba(52, 152, 219, 0.12);
+    color: #2980B9;
+}
+
+.level-Trung\ cấp {
+    background: rgba(39, 174, 96, 0.12);
+    color: #1E8449;
+}
+
+.level-Nâng\ cao {
+    background: rgba(142, 68, 173, 0.12);
+    color: #6C3483;
+}
+
+/* Goal badges */
+.goal-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--primary), #896BFF);
+    color: white;
+}
+
+/* ===================================
+   📊 BMI CALCULATOR
+   =================================== */
+
+/* Form Card */
+.bmi-form-card {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+
+/* Gender Buttons */
+.gender-btn {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #E8ECF4;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    color: #888;
+}
+
+.gender-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.gender-btn.active {
+    border-color: var(--primary);
+    background: linear-gradient(135deg, var(--primary), #896BFF);
+    color: white;
+    transform: scale(1.02);
+}
+
+.gender-btn i {
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+}
+
+/* Range Sliders */
+.bmi-range {
+    -webkit-appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: #E8ECF4;
+    outline: none;
+    transition: var(--transition);
+}
+
+.bmi-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), #896BFF);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(108, 99, 255, 0.4);
+    transition: var(--transition);
+}
+
+.bmi-range::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* Manual input toggle */
+.manual-inputs {
+    background: #F8F9FD;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 8px;
+    animation: slideIn 0.3s ease;
+}
+
+/* BMI Result Card */
+.bmi-result-card {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+
+/* BMI Avatar */
+.bmi-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--primary), #896BFF);
+    color: white;
+    box-shadow: 0 8px 20px rgba(108, 99, 255, 0.3);
+}
+
+/* BMI Value Box */
+.bmi-value-box {
+    padding: 24px;
+    border-radius: var(--border-radius-sm);
+    background: #F8F9FD;
+}
+
+.bmi-label {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.bmi-number {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 10px;
+    transition: all 0.5s;
+}
+
+/* BMI Colors */
+.bmi-underweight .bmi-number {
+    color: #17A2B8;
+}
+
+.bmi-normal .bmi-number {
+    color: #28A745;
+}
+
+.bmi-overweight .bmi-number {
+    color: #FFC107;
+}
+
+.bmi-obese1 .bmi-number {
+    color: #FD7E14;
+}
+
+.bmi-obese2 .bmi-number {
+    color: #DC3545;
+}
+
+.bmi-category-badge {
+    display: inline-block;
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.bmi-underweight .bmi-category-badge {
+    background: rgba(23, 162, 184, 0.15);
+    color: #117A8B;
+}
+
+.bmi-normal .bmi-category-badge {
+    background: rgba(40, 167, 69, 0.15);
+    color: #1E7E34;
+}
+
+.bmi-overweight .bmi-category-badge {
+    background: rgba(255, 193, 7, 0.15);
+    color: #856404;
+}
+
+.bmi-obese1 .bmi-category-badge {
+    background: rgba(253, 126, 20, 0.15);
+    color: #C56A00;
+}
+
+.bmi-obese2 .bmi-category-badge {
+    background: rgba(220, 53, 69, 0.15);
+    color: #B21F2D;
+}
+
+/* BMI Scale Bar */
+.bmi-scale {
+    margin: 0 10px;
+}
+
+.bmi-scale-bar {
+    display: flex;
+    height: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 6px;
+}
+
+.bmi-scale-segment {
+    flex: 1;
+}
+
+.seg-underweight {
+    background: #17A2B8;
+    flex: 1.8;
+}
+
+.seg-normal {
+    background: #28A745;
+    flex: 2.2;
+}
+
+.seg-overweight {
+    background: #FFC107;
+    flex: 1;
+}
+
+.seg-obese1 {
+    background: #FD7E14;
+    flex: 2.5;
+}
+
+.seg-obese2 {
+    background: #DC3545;
+    flex: 2;
+}
+
+.bmi-scale-pointer {
+    position: absolute;
+    top: -4px;
+    width: 6px;
+    height: 24px;
+    background: #2C3E50;
+    border-radius: 3px;
+    transform: translateX(-50%);
+    transition: left 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.bmi-scale-pointer::after {
+    content: '▼';
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #2C3E50;
+}
+
+.bmi-scale-labels,
+.bmi-scale-names {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    margin-top: 3px;
+    color: #888;
+}
+
+.bmi-scale-names {
+    font-weight: 600;
+}
+
+/* BMI Stat Boxes */
+.bmi-stat-box {
+    background: #F8F9FD;
+    border-radius: var(--border-radius-sm);
+    padding: 16px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.bmi-stat-box:hover {
+    background: #EEF0FB;
+    transform: translateY(-2px);
+}
+
+.bmi-stat-box i {
+    font-size: 1.4rem;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.bmi-stat-val {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #333;
+}
+
+.bmi-stat-lbl {
+    font-size: 0.72rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* BMI Advice Box */
+.bmi-advice-box {
+    border-radius: var(--border-radius-sm);
+    padding: 16px 20px;
+    border-left: 4px solid var(--primary);
+    background: linear-gradient(135deg, rgba(108, 99, 255, 0.05), rgba(78, 205, 196, 0.05));
+}
+
+/* BMI Reference Table */
+.bmi-table td,
+.bmi-table th {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+}
+
+.bmi-row-underweight {
+    background: rgba(23, 162, 184, 0.06);
+}
+
+.bmi-row-normal {
+    background: rgba(40, 167, 69, 0.06);
+}
+
+.bmi-row-overweight {
+    background: rgba(255, 193, 7, 0.06);
+}
+
+.bmi-row-obese1 {
+    background: rgba(253, 126, 20, 0.06);
+}
+
+.bmi-row-obese2 {
+    background: rgba(220, 53, 69, 0.06);
+}
+
+/* BMI History Table */
+#bmiHistoryBody tr {
+    transition: var(--transition);
+}
+
+/* Highlight active row */
+.bmi-active-row {
+    background: rgba(108, 99, 255, 0.08) !important;
+}
+
+/* Orange color */
+.text-orange {
+    color: #FD7E14;
+}
+
+.bg-orange {
+    background: #FD7E14;
+}
+
+/* Pulse animation cho result */
+.highlight-pulse {
+    animation: highlightPulse 0.6s ease;
+}
+
+@keyframes highlightPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 30px rgba(108, 99, 255, 0.3);
+    }
+}
