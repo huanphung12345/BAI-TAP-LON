@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏋️ FitTrack - Quản Trị</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-light">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-admin sticky-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold" href="admin.html">
+                <i class="bi bi-gear-fill me-2"></i>FitTrack Admin
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="adminNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#workoutManager">
+                            <i class="bi bi-calendar-plus me-1"></i>Buổi Tập
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#exerciseManager">
+                            <i class="bi bi-list-task me-1"></i>Bài Tập
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-light btn-sm ms-2 px-3" href="index.html">
+                            <i class="bi bi-house me-1"></i>Trang Chủ
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid px-4 py-4">
+        <!-- Admin Stats -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-3">
+                <div class="admin-stat-card">
+                    <div class="d-flex align-items-center">
+                        <div class="admin-stat-icon bg-primary bg-opacity-10 text-primary">
+                            <i class="bi bi-calendar-check"></i>
+                        </div>
+                        <div class="ms-3">
+                            <div class="admin-stat-number" id="adminTotalWorkouts">0</div>
+                            <div class="admin-stat-label">Buổi Tập</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="admin-stat-card">
+                    <div class="d-flex align-items-center">
+                        <div class="admin-stat-icon bg-success bg-opacity-10 text-success">
+                            <i class="bi bi-list-check"></i>
+                        </div>
+                        <div class="ms-3">
+                            <div class="admin-stat-number" id="adminTotalExercises">0</div>
+                            <div class="admin-stat-label">Bài Tập</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="admin-stat-card">
+                    <div class="d-flex align-items-center">
+                        <div class="admin-stat-icon bg-danger bg-opacity-10 text-danger">
+                            <i class="bi bi-fire"></i>
+                        </div>
+                        <div class="ms-3">
+                            <div class="admin-stat-number" id="adminTotalCal">0</div>
+                            <div class="admin-stat-label">Tổng Calo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="admin-stat-card">
+                    <div class="d-flex align-items-center">
+                        <div class="admin-stat-icon bg-warning bg-opacity-10 text-warning">
+                            <i class="bi bi-stopwatch"></i>
+                        </div>
+                        <div class="ms-3">
+                            <div class="admin-stat-number" id="adminTotalMin">0</div>
+                            <div class="admin-stat-label">Tổng Phút</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Workout Management -->
+        <section id="workoutManager" class="mb-5">
+            <div class="card admin-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">
+                        <i class="bi bi-calendar-plus me-2"></i>Quản Lý Buổi Tập
+                    </h4>
+                    <button class="btn btn-primary" id="btnAddWorkout">
+                        <i class="bi bi-plus-lg me-1"></i>Thêm Buổi Tập
+                    </button>
+                </div>
+                <div class="card-body">
+                    <!-- Workout Form (hidden by default) -->
+                    <div class="collapse mb-4" id="workoutFormCollapse">
+                        <div class="card card-body bg-light border-0">
+                            <h5 id="workoutFormTitle">
+                                <i class="bi bi-plus-circle me-2"></i>Thêm Buổi Tập Mới
+                            </h5>
+                            <form id="workoutForm">
+                                <input type="hidden" id="workoutId">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-semibold">Tên Buổi Tập *</label>
+                                        <input type="text" class="form-control" id="workoutName" required
+                                            placeholder="VD: Ngày tập ngực, Cardio sáng...">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label fw-semibold">Ngày Tập *</label>
+                                        <input type="date" class="form-control" id="workoutDate" required>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label fw-semibold">Thời Gian (phút) *</label>
+                                        <input type="number" class="form-control" id="workoutDuration" min="1" required
+                                            placeholder="60">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold">Nhóm Cơ *</label>
+                                        <select class="form-select" id="workoutMuscleGroup" required>
+                                            <option value="">Chọn nhóm cơ</option>
+                                            <option value="Ngực">Ngực</option>
+                                            <option value="Lưng">Lưng</option>
+                                            <option value="Vai">Vai</option>
+                                            <option value="Tay trước">Tay trước (Biceps)</option>
+                                            <option value="Tay sau">Tay sau (Triceps)</option>
+                                            <option value="Chân">Chân</option>
+                                            <option value="Bụng">Bụng</option>
+                                            <option value="Cardio">Cardio</option>
+                                            <option value="Full Body">Full Body</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold">Calo Tiêu Hao</label>
+                                        <input type="number" class="form-control" id="workoutCalories" min="0"
+                                            placeholder="Tự tính hoặc nhập tay">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold">Bài Tập Trong Buổi</label>
+                                        <input type="text" class="form-control" id="workoutExercises"
+                                            placeholder="VD: Bench Press, Dumbbell Fly...">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold">Ghi Chú</label>
+                                        <textarea class="form-control" id="workoutNotes" rows="2"
+                                            placeholder="Cảm nhận buổi tập, điểm cần cải thiện..."></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-success me-2" id="btnSaveWorkout">
+                                            <i class="bi bi-check-lg me-1"></i>Lưu
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" id="btnCancelWorkout">
+                                            <i class="bi bi-x-lg me-1"></i>Hủy
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Workout Table -->
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle" id="workoutTable">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tên Buổi Tập</th>
+                                    <th>Ngày</th>
+                                    <th>Nhóm Cơ</th>
+                                    <th>Thời Gian</th>
+                                    <th>Calo</th>
+                                    <th>Ghi Chú</th>
+                                    <th class="text-center">Hành Động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="workoutTableBody">
+                                <!-- Dynamic rows -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Loading -->
+                    <div class="text-center py-4 d-none" id="workoutLoading">
+                        <div class="spinner-border text-primary"></div>
+                        <p class="mt-2 text-muted">Đang tải...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercise Management -->
+        <section id="exerciseManager">
+            <div class="card admin-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">
+                        <i class="bi bi-list-task me-2"></i>Quản Lý Bài Tập
+                    </h4>
+                    <button class="btn btn-success" id="btnAddExercise">
+                        <i class="bi bi-plus-lg me-1"></i>Thêm Bài Tập
+                    </button>
+                </div>
+                <div class="card-body">
+                    <!-- Exercise Form -->
+                    <div class="collapse mb-4" id="exerciseFormCollapse">
+                        <div class="card card-body bg-light border-0">
+                            <h5 id="exerciseFormTitle">
+                                <i class="bi bi-plus-circle me-2"></i>Thêm Bài Tập Mới
+                            </h5>
+                            <form id="exerciseForm">
+                                <input type="hidden" id="exerciseId">
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold">Tên Bài Tập *</label>
+                                        <input type="text" class="form-control" id="exerciseName" required
+                                            placeholder="VD: Bench Press, Squat...">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold">Nhóm Cơ *</label>
+                                        <select class="form-select" id="exerciseMuscleGroup" required>
+                                            <option value="">Chọn nhóm cơ</option>
+                                            <option value="Ngực">Ngực</option>
+                                            <option value="Lưng">Lưng</option>
+                                            <option value="Vai">Vai</option>
+                                            <option value="Tay trước">Tay trước</option>
+                                            <option value="Tay sau">Tay sau</option>
+                                            <option value="Chân">Chân</option>
+                                            <option value="Bụng">Bụng</option>
+                                            <option value="Cardio">Cardio</option>
+                                            <option value="Full Body">Full Body</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold">Calo / Set</label>
+                                        <input type="number" class="form-control" id="exerciseCalPerSet" min="0"
+                                            placeholder="VD: 15">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold">Số Set</label>
+                                        <input type="number" class="form-control" id="exerciseSets" min="1"
+                                            placeholder="VD: 4">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold">Số Rep / Set</label>
+                                        <input type="number" class="form-control" id="exerciseReps" min="1"
+                                            placeholder="VD: 12">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label fw-semibold">Trọng Lượng (kg)</label>
+                                        <input type="number" class="form-control" id="exerciseWeight" min="0" step="0.5"
+                                            placeholder="VD: 40">
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-success me-2" id="btnSaveExercise">
+                                            <i class="bi bi-check-lg me-1"></i>Lưu
+                                        </button>
+                                        <button type="button" class="btn btn-secondary" id="btnCancelExercise">
+                                            <i class="bi bi-x-lg me-1"></i>Hủy
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Exercise Table -->
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle" id="exerciseTable">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tên Bài Tập</th>
+                                    <th>Nhóm Cơ</th>
+                                    <th>Sets</th>
+                                    <th>Reps</th>
+                                    <th>Trọng Lượng</th>
+                                    <th>Cal/Set</th>
+                                    <th class="text-center">Hành Động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="exerciseTableBody">
+                                <!-- Dynamic rows -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="text-center py-4 d-none" id="exerciseLoading">
+                        <div class="spinner-border text-success"></div>
+                        <p class="mt-2 text-muted">Đang tải...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">
+                        <i class="bi bi-exclamation-triangle me-2"></i>Xác Nhận Xóa
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="deleteMessage">Bạn có chắc muốn xóa mục này?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="btnConfirmDelete">
+                        <i class="bi bi-trash me-1"></i>Xóa
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toastNotification" class="toast" role="alert">
+            <div class="toast-header">
+                <i class="bi bi-bell me-2" id="toastIcon"></i>
+                <strong class="me-auto" id="toastTitle">Thông Báo</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body" id="toastBody"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>
